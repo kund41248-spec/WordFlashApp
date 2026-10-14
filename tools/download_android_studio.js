@@ -6,7 +6,9 @@ const path = require("path");
 const URL_STR =
   "https://dl.google.com/dl/android/studio/install/2024.2.2.13/android-studio-2024.2.2.13-windows.exe";
 
-const OUT_DIR = process.argv[2] || "D:\\英语APP开发\\installer";
+// 用法: node download_android_studio.js [输出目录]
+// 不传输出目录时，下载到当前工作目录下的 installer\ 文件夹。
+const OUT_DIR = process.argv[2] || path.join(process.cwd(), "installer");
 const OUT_FILE = path.join(OUT_DIR, "android-studio-2024.2.2.13-windows.exe");
 const PART_FILE = OUT_FILE + ".part";
 

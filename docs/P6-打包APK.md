@@ -300,13 +300,18 @@ https://dl.google.com/dl/android/studio/install/2024.2.2.13/android-studio-2024.
 
 约 3~5 GB，视网速 10~40 分钟。
 
-### 1.3 关于本机已有的 JDK
+### 1.3 关于 JDK
 
-`D:\Develop\Java` 有 **JDK 17**（P3 阶段实测可用）。但：
+本机在 `D:\Develop\Java` 有 **JDK 17**（P3 阶段实测可用）。但：
 
 - **不需要配到 PATH**，Android Studio 用自己的 JetBrains Runtime
 - 只有在**命令行构建**时才需要 `JAVA_HOME`
 - AGP 8.7 要求 JDK 17+，现有版本满足要求
+
+> **其他机器请注意**：上面的 `D:\Develop\Java` 是本机路径，你的机器上未必存在。
+> `build-apk.ps1` 会自动按 `JAVA_HOME` → `PATH` → Android Studio 自带 JDK
+> 的顺序查找 `keytool`，无需改脚本；只需确保装好 JDK 17 并设置 `JAVA_HOME`，
+> 或把 JDK 的 `bin` 加入 `PATH`。
 
 ---
 
@@ -314,7 +319,7 @@ https://dl.google.com/dl/android/studio/install/2024.2.2.13/android-studio-2024.
 
 ### 方式 A：Android Studio 图形界面（推荐）
 
-1. `File` → `Open`，选择 **`D:\英语APP开发`** 这个文件夹**本身**
+1. `File` → `Open`，选择**项目根目录**（本项目当前为 `D:\WordFlashApp`）
 2. 会提示 **Gradle Wrapper 缺失** → 点 `OK` 让它自动补齐
    - 这一步下载 Gradle 8.9（约 130MB）+ 依赖（约 500MB）
 3. 等同步完成（首次 5~15 分钟）
@@ -325,7 +330,7 @@ https://dl.google.com/dl/android/studio/install/2024.2.2.13/android-studio-2024.
 项目根目录有 `build-apk.ps1`：
 
 ```powershell
-cd D:\英语APP开发
+cd <你的项目根目录>            # 本项目当前实际路径为 D:\WordFlashApp
 
 .\build-apk.ps1              # 构建 debug APK
 .\build-apk.ps1 -Release     # 构建 release APK
@@ -404,8 +409,8 @@ cd D:\WordFlashApp
 # 也避免口令出现在进程列表中
 $env:WF_KSPASS = "你的口令"
 
-& "D:\Develop\Java\bin\keytool.exe" -genkeypair -v `
-  -keystore "D:\WordFlashApp\release.keystore" `
+& keytool -genkeypair -v `
+  -keystore ".\release.keystore" `
   -alias wordflash `
   -keyalg RSA -keysize 2048 -validity 36500 `
   -storetype PKCS12 `
@@ -472,7 +477,7 @@ keystore.properties
 ```
 BUILD SUCCESSFUL in 2m 14s
 
-产物: D:\英语APP开发\app\build\outputs\apk\release\app-release.apk
+产物: D:\WordFlashApp\app\build\outputs\apk\release\app-release.apk
 大小: 6.5 MB
 ```
 
@@ -605,7 +610,7 @@ res/
 PNG 由 `tools/gen_icons.py` 生成，需要改配色或样式时改脚本重跑即可：
 
 ```powershell
-& "D:\Develop\Python\python.exe" tools\gen_icons.py app\src\main\res
+python tools\gen_icons.py app\src\main\res
 ```
 
 **想换成自己的图标**：

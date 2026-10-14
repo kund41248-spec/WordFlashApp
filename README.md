@@ -75,12 +75,34 @@ app/src/main/java/com/wordflash/app/
                                  stats / wordbook / settings / importbook
 ```
 
+## 下载
+
+**方式一：直接下载 ZIP（最简单）**
+
+点页面右上角绿色的 **`< > Code`** 按钮 → **Download ZIP**，解压即得完整项目。
+适合只想阅读源码、不打算用 git 的情况。
+
+**方式二：git clone（推荐，便于同步更新）**
+
+```bash
+git clone https://github.com/kund41248-spec/WordFlashApp.git
+cd WordFlashApp
+```
+
+之后执行 `git pull` 即可获取最新版本。
+
+> **下载后无法直接打 release 包是正常的。**
+> `release.keystore` 与 `keystore.properties` 属于签名私密文件，已被
+> `.gitignore` 排除，不会随仓库分发。需要 release 包请先自行生成密钥：
+> `.\build-apk.ps1 -GenKeystore`。**debug 包无需任何密钥，可直接构建。**
+
 ## 快速开始
 
 ### 1. 环境
 
 - **Android Studio**（2024.2 或更新）
-- **JDK 17**（Android Studio 自带即可）
+- **JDK 17**（Android Studio 自带即可；命令行构建需 `JAVA_HOME` 指向 JDK 17，
+  或把 JDK 的 `bin` 加入 `PATH`）
 - **Android SDK**：API 35 + Build-Tools 35
 
 ### 2. 打开项目
@@ -88,6 +110,13 @@ app/src/main/java/com/wordflash/app/
 Android Studio → `File` → `Open` → 选择本项目根目录。
 
 首次会提示 **Gradle Wrapper 缺失**，点 `OK` 让它自动补齐。
+
+若未用 Android Studio 打开过，需手工创建 `local.properties` 指定 SDK 路径
+（该文件含机器专属路径，同样不入库）：
+
+```properties
+sdk.dir=C\:\\Users\\你的用户名\\AppData\\Local\\Android\\Sdk
+```
 
 ### 3. 构建
 
@@ -108,6 +137,9 @@ Android Studio → `File` → `Open` → 选择本项目根目录。
 
 > 若报「未对文件进行数字签名」，先执行：
 > `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`
+
+> 脚本会自动按 `JAVA_HOME` → `PATH` → Android Studio 自带 JDK 的顺序
+> 查找 `keytool`，无需手工改路径。
 
 ## 文档
 
@@ -147,16 +179,22 @@ abandon,/əˈbændən/,v.,放弃；抛弃,He abandoned his car in the snow.,他�
 
 ```powershell
 cd tools/verify
-& "D:\Develop\Java\bin\javac.exe" -encoding UTF-8 -d . SchedulerCheck.java SessionCheck.java
-& "D:\Develop\Java\bin\java.exe" -Dfile.encoding=UTF-8 -cp . SchedulerCheck
-& "D:\Develop\Java\bin\java.exe" -Dfile.encoding=UTF-8 -cp . SessionCheck
+javac -encoding UTF-8 -d . SchedulerCheck.java SessionCheck.java
+java -Dfile.encoding=UTF-8 -cp . SchedulerCheck
+java -Dfile.encoding=UTF-8 -cp . SessionCheck
 ```
 
 **预期：50 + 28 = 78 项断言全部通过。**
 
+> 需要 `javac` / `java` 在 `PATH` 上（即 JDK 17 已正确安装）。
+> 若提示找不到命令，说明只装了 JRE 或 JDK 未加入 `PATH`；
+> 也可直接用完整路径调用，例如
+> `& "$env:JAVA_HOME\bin\javac.exe" -encoding UTF-8 -d . SchedulerCheck.java SessionCheck.java`。
+
 ## 许可
 
-本项目代码可自由使用与修改。
+本项目基于 [MIT License](LICENSE) 开源，可自由使用、修改与分发（含商用），
+保留版权声明即可。
 
 `assets/dict/` 下的示例词库数据为自建内容，词条释义与例句为通用表述，
 音标采用标准 IPA。如需商用请自行核实数据来源。

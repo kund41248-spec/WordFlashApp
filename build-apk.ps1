@@ -45,19 +45,34 @@ function Confirm($prompt, $default = $false) {
 if ($GenKeystore) {
     Info "=== 生成签名密钥 ==="
 
-    # 优先用 JDK 自带的 keytool；找不到就用 PATH 上的
+    # 按顺序尝试：JAVA_HOME → PATH → Android Studio 自带 JDK
     $keytool = $null
-    foreach ($p in @(
-        "D:\Develop\Java\bin\keytool.exe",
-        "$env:JAVA_HOME\bin\keytool.exe"
-    )) {
-        if ($p -and (Test-Path $p)) { $keytool = $p; break }
+    if ($env:JAVA_HOME) {
+        $p = Join-Path $env:JAVA_HOME "bin\keytool.exe"
+        if (Test-Path $p) { $keytool = $p }
     }
     if (-not $keytool) {
         $cmd = Get-Command keytool -ErrorAction SilentlyContinue
         if ($cmd) { $keytool = $cmd.Source }
     }
-    if (-not $keytool) { Fail "找不到 keytool。请先安装 JDK 17。" }
+    if (-not $keytool) {
+        # Android Studio 各版本的 jbr 目录
+        foreach ($base in @(
+            "$env:ProgramFiles\Android\Android Studio\jbr\bin\keytool.exe",
+            "${env:ProgramFiles(x86)}\Android\Android Studio\jbr\bin\keytool.exe",
+            "$env:LOCALAPPDATA\Programs\Android Studio\jbr\bin\keytool.exe"
+        )) {
+            if ($base -and (Test-Path $base)) { $keytool = $base; break }
+        }
+    }
+    if (-not $keytool) {
+        Fail @"
+找不到 keytool。请先安装 JDK 17，然后二选一：
+  1. 设置环境变量 JAVA_HOME 指向 JDK 安装目录
+  2. 把 JDK 的 bin 目录加入 PATH
+Android Studio 自带的 JDK 也会被自动识别。
+"@
+    }
 
     $ksPath = Join-Path $root "release.keystore"
     if (Test-Path $ksPath) {
