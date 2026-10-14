@@ -1,0 +1,369 @@
+{
+  "name": "四级核心词汇",
+  "description": "大学英语四级高频词（示例包）",
+  "category": "CET4",
+  "version": 1,
+  "sortOrder": 1,
+  "words": [
+    {
+      "spelling": "abandon",
+      "phonetic": "/əˈbændən/",
+      "pos": "v.",
+      "meaning": "放弃；抛弃；遗弃",
+      "example": "He abandoned his car in the snow.",
+      "exampleTranslation": "他把车丢弃在雪地里。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "absorb",
+      "phonetic": "/əbˈzɔːb/",
+      "pos": "v.",
+      "meaning": "吸收；吸引；理解",
+      "example": "Plants absorb carbon dioxide from the air.",
+      "exampleTranslation": "植物从空气中吸收二氧化碳。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "abstract",
+      "phonetic": "/ˈæbstrækt/",
+      "pos": "adj.",
+      "meaning": "抽象的；深奥的",
+      "example": "Beauty is an abstract concept.",
+      "exampleTranslation": "美是一个抽象的概念。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "academic",
+      "phonetic": "/ˌækəˈdemɪk/",
+      "pos": "adj.",
+      "meaning": "学术的；学院的",
+      "example": "She has a strong academic background.",
+      "exampleTranslation": "她有很强的学术背景。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "accelerate",
+      "phonetic": "/əkˈseləreɪt/",
+      "pos": "v.",
+      "meaning": "加速；促进",
+      "example": "The car accelerated smoothly.",
+      "exampleTranslation": "汽车平稳地加速。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "accommodate",
+      "phonetic": "/əˈkɒmədeɪt/",
+      "pos": "v.",
+      "meaning": "容纳；提供住宿；适应",
+      "example": "The hotel can accommodate 500 guests.",
+      "exampleTranslation": "这家酒店可容纳 500 位客人。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "accompany",
+      "phonetic": "/əˈkʌmpəni/",
+      "pos": "v.",
+      "meaning": "陪伴；伴随；伴奏",
+      "example": "She accompanied me to the hospital.",
+      "exampleTranslation": "她陪我去了医院。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "accomplish",
+      "phonetic": "/əˈkʌmplɪʃ/",
+      "pos": "v.",
+      "meaning": "完成；实现；达到",
+      "example": "We accomplished the task on time.",
+      "exampleTranslation": "我们按时完成了任务。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "accurate",
+      "phonetic": "/ˈækjərət/",
+      "pos": "adj.",
+      "meaning": "准确的；精确的",
+      "example": "His description was remarkably accurate.",
+      "exampleTranslation": "他的描述非常准确。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "achieve",
+      "phonetic": "/əˈtʃiːv/",
+      "pos": "v.",
+      "meaning": "达到；实现；取得",
+      "example": "She achieved her goal at last.",
+      "exampleTranslation": "她终于实现了目标。",
+      "difficulty": 1
+    },
+    {
+      "spelling": "acquire",
+      "phonetic": "/əˈkwaɪə/",
+      "pos": "v.",
+      "meaning": "获得；学到；取得",
+      "example": "Children acquire language quickly.",
+      "exampleTranslation": "儿童学习语言很快。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "adapt",
+      "phonetic": "/əˈdæpt/",
+      "pos": "v.",
+      "meaning": "适应；改编；使适合",
+      "example": "You must adapt to the new environment.",
+      "exampleTranslation": "你必须适应新环境。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "adequate",
+      "phonetic": "/ˈædɪkwət/",
+      "pos": "adj.",
+      "meaning": "足够的；适当的；胜任的",
+      "example": "The supply is adequate for our needs.",
+      "exampleTranslation": "供应足以满足我们的需求。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adjust",
+      "phonetic": "/əˈdʒʌst/",
+      "pos": "v.",
+      "meaning": "调整；适应；校准",
+      "example": "Please adjust the volume.",
+      "exampleTranslation": "请调整音量。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "admire",
+      "phonetic": "/ədˈmaɪə/",
+      "pos": "v.",
+      "meaning": "钦佩；欣赏；赞美",
+      "example": "I admire her courage.",
+      "exampleTranslation": "我钦佩她的勇气。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "adopt",
+      "phonetic": "/əˈdɒpt/",
+      "pos": "v.",
+      "meaning": "采用；收养；采纳",
+      "example": "They adopted a new policy.",
+      "exampleTranslation": "他们采用了一项新政策。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "advocate",
+      "phonetic": "/ˈædvəkeɪt/",
+      "pos": "v.",
+      "meaning": "提倡；主张；拥护",
+      "example": "He advocates a vegetarian diet.",
+      "exampleTranslation": "他提倡素食。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "affect",
+      "phonetic": "/əˈfekt/",
+      "pos": "v.",
+      "meaning": "影响；感动；侵袭",
+      "example": "Smoking affects your health.",
+      "exampleTranslation": "吸烟影响你的健康。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "afford",
+      "phonetic": "/əˈfɔːd/",
+      "pos": "v.",
+      "meaning": "负担得起；提供",
+      "example": "We can't afford a new car.",
+      "exampleTranslation": "我们买不起新车。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "aggressive",
+      "phonetic": "/əˈɡresɪv/",
+      "pos": "adj.",
+      "meaning": "好斗的；有进取心的",
+      "example": "He has an aggressive sales style.",
+      "exampleTranslation": "他有很强的销售进取心。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "alternative",
+      "phonetic": "/ɔːlˈtɜːnətɪv/",
+      "pos": "n.",
+      "meaning": "可供选择的事物；替代方案",
+      "example": "We have no alternative but to wait.",
+      "exampleTranslation": "我们别无选择，只能等待。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "ambiguous",
+      "phonetic": "/æmˈbɪɡjuəs/",
+      "pos": "adj.",
+      "meaning": "模棱两可的；含糊的",
+      "example": "His answer was deliberately ambiguous.",
+      "exampleTranslation": "他的回答故意含糊其辞。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "analyze",
+      "phonetic": "/ˈænəlaɪz/",
+      "pos": "v.",
+      "meaning": "分析；解析",
+      "example": "Let's analyze the data first.",
+      "exampleTranslation": "我们先分析数据。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "anticipate",
+      "phonetic": "/ænˈtɪsɪpeɪt/",
+      "pos": "v.",
+      "meaning": "预期；预料；期望",
+      "example": "We anticipate a busy season.",
+      "exampleTranslation": "我们预计会是旺季。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "apparent",
+      "phonetic": "/əˈpærənt/",
+      "pos": "adj.",
+      "meaning": "明显的；表面上的",
+      "example": "It was apparent that he was lying.",
+      "exampleTranslation": "很明显他在说谎。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "appeal",
+      "phonetic": "/əˈpiːl/",
+      "pos": "v.",
+      "meaning": "呼吁；上诉；有吸引力",
+      "example": "The design appeals to young people.",
+      "exampleTranslation": "这个设计对年轻人有吸引力。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "appreciate",
+      "phonetic": "/əˈpriːʃieɪt/",
+      "pos": "v.",
+      "meaning": "感激；欣赏；理解",
+      "example": "I really appreciate your help.",
+      "exampleTranslation": "我非常感激你的帮助。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "approach",
+      "phonetic": "/əˈprəʊtʃ/",
+      "pos": "n.",
+      "meaning": "方法；途径；接近",
+      "example": "We need a new approach.",
+      "exampleTranslation": "我们需要新方法。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "appropriate",
+      "phonetic": "/əˈprəʊpriət/",
+      "pos": "adj.",
+      "meaning": "适当的；恰当的",
+      "example": "Wear appropriate clothes for the occasion.",
+      "exampleTranslation": "穿适合场合的衣服。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "approve",
+      "phonetic": "/əˈpruːv/",
+      "pos": "v.",
+      "meaning": "批准；赞成；认可",
+      "example": "The committee approved the plan.",
+      "exampleTranslation": "委员会批准了该计划。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "arrange",
+      "phonetic": "/əˈreɪndʒ/",
+      "pos": "v.",
+      "meaning": "安排；整理；布置",
+      "example": "I'll arrange a meeting.",
+      "exampleTranslation": "我来安排一次会议。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "assess",
+      "phonetic": "/əˈses/",
+      "pos": "v.",
+      "meaning": "评估；评定；估价",
+      "example": "We need to assess the risk.",
+      "exampleTranslation": "我们需要评估风险。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "assign",
+      "phonetic": "/əˈsaɪn/",
+      "pos": "v.",
+      "meaning": "分配；指派；布置",
+      "example": "The teacher assigned us homework.",
+      "exampleTranslation": "老师给我们布置了作业。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "assume",
+      "phonetic": "/əˈsjuːm/",
+      "pos": "v.",
+      "meaning": "假定；承担；呈现",
+      "example": "I assume you agree.",
+      "exampleTranslation": "我想你是同意的。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "attach",
+      "phonetic": "/əˈtætʃ/",
+      "pos": "v.",
+      "meaning": "附上；贴上；使依附",
+      "example": "Please attach the file to the email.",
+      "exampleTranslation": "请把文件附在邮件里。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "attempt",
+      "phonetic": "/əˈtempt/",
+      "pos": "v.",
+      "meaning": "尝试；试图",
+      "example": "He attempted to climb the wall.",
+      "exampleTranslation": "他试图翻过那堵墙。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "attitude",
+      "phonetic": "/ˈætɪtjuːd/",
+      "pos": "n.",
+      "meaning": "态度；看法；姿态",
+      "example": "Her attitude changed completely.",
+      "exampleTranslation": "她的态度完全变了。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "attract",
+      "phonetic": "/əˈtrækt/",
+      "pos": "v.",
+      "meaning": "吸引；引起",
+      "example": "The exhibition attracted thousands.",
+      "exampleTranslation": "展览吸引了数千人。",
+      "difficulty": 2
+    },
+    {
+      "spelling": "authority",
+      "phonetic": "/ɔːˈθɒrəti/",
+      "pos": "n.",
+      "meaning": "权威；当局；权限",
+      "example": "He is an authority on physics.",
+      "exampleTranslation": "他是物理学权威。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "available",
+      "phonetic": "/əˈveɪləbl/",
+      "pos": "adj.",
+      "meaning": "可获得的；有空的",
+      "example": "Tickets are still available.",
+      "exampleTranslation": "票仍然有售。",
+      "difficulty": 3
+    }
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "name": "托福学科词汇",
+  "description": "TOEFL 学科术语（示例包）",
+  "category": "TOEFL",
+  "version": 1,
+  "sortOrder": 6,
+  "words": [
+    {
+      "spelling": "abiotic",
+      "phonetic": "/ˌeɪbaɪˈɒtɪk/",
+      "pos": "adj.",
+      "meaning": "非生物的",
+      "example": "Abiotic factors affect ecosystems.",
+      "exampleTranslation": "非生物因素影响生态系统。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "absorption",
+      "phonetic": "/əbˈzɔːpʃn/",
+      "pos": "n.",
+      "meaning": "吸收；专注",
+      "example": "Nutrient absorption occurs here.",
+      "exampleTranslation": "营养吸收在此发生。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "accelerate",
+      "phonetic": "/əkˈseləreɪt/",
+      "pos": "v.",
+      "meaning": "加速；促进",
+      "example": "The reaction accelerated.",
+      "exampleTranslation": "反应加速了。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "accumulation",
+      "phonetic": "/əˌkjuːmjəˈleɪʃn/",
+      "pos": "n.",
+      "meaning": "积累；堆积",
+      "example": "Sediment accumulation.",
+      "exampleTranslation": "沉积物堆积。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adaptation",
+      "phonetic": "/ˌædæpˈteɪʃn/",
+      "pos": "n.",
+      "meaning": "适应；适应性变化",
+      "example": "Adaptation is key to survival.",
+      "exampleTranslation": "适应是生存的关键。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adhesion",
+      "phonetic": "/ədˈhiːʒn/",
+      "pos": "n.",
+      "meaning": "粘附；附着力",
+      "example": "Adhesion between surfaces.",
+      "exampleTranslation": "表面之间的粘附。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "adjacent",
+      "phonetic": "/əˈdʒeɪsnt/",
+      "pos": "adj.",
+      "meaning": "邻近的；毗连的",
+      "example": "Adjacent layers of rock.",
+      "exampleTranslation": "相邻的岩层。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "aerial",
+      "phonetic": "/ˈeəriəl/",
+      "pos": "adj.",
+      "meaning": "空中的；航空的",
+      "example": "Aerial photography.",
+      "exampleTranslation": "航空摄影。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "algae",
+      "phonetic": "/ˈældʒiː/",
+      "pos": "n.",
+      "meaning": "藻类",
+      "example": "Algae bloom in warm water.",
+      "exampleTranslation": "藻类在温水中繁殖。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "alluvial",
+      "phonetic": "/əˈluːviəl/",
+      "pos": "adj.",
+      "meaning": "冲积的",
+      "example": "Alluvial soil is fertile.",
+      "exampleTranslation": "冲积土很肥沃。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "ambient",
+      "phonetic": "/ˈæmbiənt/",
+      "pos": "adj.",
+      "meaning": "周围的；环境的",
+      "example": "Ambient temperature.",
+      "exampleTranslation": "环境温度。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "amorphous",
+      "phonetic": "/əˈmɔːfəs/",
+      "pos": "adj.",
+      "meaning": "无定形的；非晶体的",
+      "example": "An amorphous solid.",
+      "exampleTranslation": "非晶体固体。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "ancestor",
+      "phonetic": "/ˈænsestə/",
+      "pos": "n.",
+      "meaning": "祖先；原型",
+      "example": "Common ancestor of mammals.",
+      "exampleTranslation": "哺乳动物的共同祖先。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "anomaly",
+      "phonetic": "/əˈnɒməli/",
+      "pos": "n.",
+      "meaning": "异常；反常现象",
+      "example": "The data showed an anomaly.",
+      "exampleTranslation": "数据显示出一个异常。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "aquatic",
+      "phonetic": "/əˈkwætɪk/",
+      "pos": "adj.",
+      "meaning": "水生的；水中的",
+      "example": "Aquatic organisms.",
+      "exampleTranslation": "水生生物。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "arid",
+      "phonetic": "/ˈærɪd/",
+      "pos": "adj.",
+      "meaning": "干旱的；贫瘠的",
+      "example": "Arid regions receive little rain.",
+      "exampleTranslation": "干旱地区降雨很少。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "artifact",
+      "phonetic": "/ˈɑːtɪfækt/",
+      "pos": "n.",
+      "meaning": "人工制品；文物",
+      "example": "Archaeologists found artifacts.",
+      "exampleTranslation": "考古学家发现了文物。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "assimilate",
+      "phonetic": "/əˈsɪməleɪt/",
+      "pos": "v.",
+      "meaning": "吸收；同化",
+      "example": "Plants assimilate nutrients.",
+      "exampleTranslation": "植物吸收养分。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "atmosphere",
+      "phonetic": "/ˈætməsfɪə/",
+      "pos": "n.",
+      "meaning": "大气；气氛",
+      "example": "The atmosphere traps heat.",
+      "exampleTranslation": "大气层留住热量。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "bacteria",
+      "phonetic": "/bækˈtɪəriə/",
+      "pos": "n.",
+      "meaning": "细菌",
+      "example": "Bacteria break down waste.",
+      "exampleTranslation": "细菌分解废物。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "basin",
+      "phonetic": "/ˈbeɪsn/",
+      "pos": "n.",
+      "meaning": "盆地；流域；盆",
+      "example": "The Amazon basin.",
+      "exampleTranslation": "亚马逊流域。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "biodiversity",
+      "phonetic": "/ˌbaɪəʊdaɪˈvɜːsəti/",
+      "pos": "n.",
+      "meaning": "生物多样性",
+      "example": "Tropical biodiversity is highest.",
+      "exampleTranslation": "热带生物多样性最高。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "canopy",
+      "phonetic": "/ˈkænəpi/",
+      "pos": "n.",
+      "meaning": "树冠层；华盖",
+      "example": "The forest canopy blocks light.",
+      "exampleTranslation": "森林树冠遮挡了阳光。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "catalyst",
+      "phonetic": "/ˈkætəlɪst/",
+      "pos": "n.",
+      "meaning": "催化剂；促进因素",
+      "example": "Enzymes act as catalysts.",
+      "exampleTranslation": "酶起催化剂作用。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "cellular",
+      "phonetic": "/ˈseljələ/",
+      "pos": "adj.",
+      "meaning": "细胞的",
+      "example": "Cellular structure.",
+      "exampleTranslation": "细胞结构。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "chronological",
+      "phonetic": "/ˌkrɒnəˈlɒdʒɪkl/",
+      "pos": "adj.",
+      "meaning": "按时间顺序的",
+      "example": "In chronological order.",
+      "exampleTranslation": "按时间顺序。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "circulation",
+      "phonetic": "/ˌsɜːkjəˈleɪʃn/",
+      "pos": "n.",
+      "meaning": "循环；流通",
+      "example": "Ocean circulation patterns.",
+      "exampleTranslation": "海洋环流模式。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "cohesion",
+      "phonetic": "/kəʊˈhiːʒn/",
+      "pos": "n.",
+      "meaning": "凝聚力；内聚性",
+      "example": "Water cohesion and surface tension.",
+      "exampleTranslation": "水的内聚性与表面张力。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "composition",
+      "phonetic": "/ˌkɒmpəˈzɪʃn/",
+      "pos": "n.",
+      "meaning": "组成；作品",
+      "example": "The composition of the soil.",
+      "exampleTranslation": "土壤的组成。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "condensation",
+      "phonetic": "/ˌkɒndenˈseɪʃn/",
+      "pos": "n.",
+      "meaning": "凝结；压缩",
+      "example": "Condensation forms clouds.",
+      "exampleTranslation": "凝结形成云。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "consecutive",
+      "phonetic": "/kənˈsekjətɪv/",
+      "pos": "adj.",
+      "meaning": "连续的；连贯的",
+      "example": "Three consecutive years.",
+      "exampleTranslation": "连续三年。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "convergence",
+      "phonetic": "/kənˈvɜːdʒəns/",
+      "pos": "n.",
+      "meaning": "趋同；汇聚",
+      "example": "Convergence of two plates.",
+      "exampleTranslation": "两个板块的汇聚。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "correlation",
+      "phonetic": "/ˌkɒrəˈleɪʃn/",
+      "pos": "n.",
+      "meaning": "相关性；关联",
+      "example": "There is a strong correlation.",
+      "exampleTranslation": "存在很强的相关性。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "crust",
+      "phonetic": "/krʌst/",
+      "pos": "n.",
+      "meaning": "地壳；外壳",
+      "example": "The Earth's crust.",
+      "exampleTranslation": "地球的地壳。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "crystal",
+      "phonetic": "/ˈkrɪstl/",
+      "pos": "n.",
+      "meaning": "晶体；水晶",
+      "example": "Ice crystals formed.",
+      "exampleTranslation": "冰晶形成了。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "decompose",
+      "phonetic": "/ˌdiːkəmˈpəʊz/",
+      "pos": "v.",
+      "meaning": "分解；腐烂",
+      "example": "Bacteria decompose organic matter.",
+      "exampleTranslation": "细菌分解有机物。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "deficiency",
+      "phonetic": "/dɪˈfɪʃnsi/",
+      "pos": "n.",
+      "meaning": "缺乏；不足",
+      "example": "Vitamin deficiency.",
+      "exampleTranslation": "维生素缺乏。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "dense",
+      "phonetic": "/dens/",
+      "pos": "adj.",
+      "meaning": "密集的；浓厚的",
+      "example": "Dense fog covered the city.",
+      "exampleTranslation": "浓雾笼罩着城市。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "deposit",
+      "phonetic": "/dɪˈpɒzɪt/",
+      "pos": "n.",
+      "meaning": "沉积物；存款",
+      "example": "Mineral deposits.",
+      "exampleTranslation": "矿床。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "diffusion",
+      "phonetic": "/dɪˈfjuːʒn/",
+      "pos": "n.",
+      "meaning": "扩散；传播",
+      "example": "Diffusion of gases.",
+      "exampleTranslation": "气体的扩散。",
+      "difficulty": 4
+    }
+  ]
+}

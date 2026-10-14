@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 品牌主色（Compose 内另有完整配色，这里仅用于启动主题） -->
+    <color name="brand_primary">#4F6BED</color>
+    <color name="brand_secondary">#00BFA5</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+</resources>

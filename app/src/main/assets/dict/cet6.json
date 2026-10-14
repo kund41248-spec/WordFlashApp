@@ -1,0 +1,369 @@
+{
+  "name": "六级进阶词汇",
+  "description": "大学英语六级进阶词（示例包）",
+  "category": "CET6",
+  "version": 1,
+  "sortOrder": 2,
+  "words": [
+    {
+      "spelling": "abolish",
+      "phonetic": "/əˈbɒlɪʃ/",
+      "pos": "v.",
+      "meaning": "废除；取消",
+      "example": "The law was abolished in 1990.",
+      "exampleTranslation": "该法律于 1990 年废除。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "abrupt",
+      "phonetic": "/əˈbrʌpt/",
+      "pos": "adj.",
+      "meaning": "突然的；生硬的",
+      "example": "The meeting came to an abrupt end.",
+      "exampleTranslation": "会议突然结束。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "absurd",
+      "phonetic": "/əbˈsɜːd/",
+      "pos": "adj.",
+      "meaning": "荒谬的；可笑的",
+      "example": "That's an absurd idea.",
+      "exampleTranslation": "那是个荒谬的想法。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "abundant",
+      "phonetic": "/əˈbʌndənt/",
+      "pos": "adj.",
+      "meaning": "丰富的；充裕的",
+      "example": "The region is abundant in oil.",
+      "exampleTranslation": "该地区石油资源丰富。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "accessory",
+      "phonetic": "/əkˈsesəri/",
+      "pos": "n.",
+      "meaning": "配件；附件；从犯",
+      "example": "She bought a phone accessory.",
+      "exampleTranslation": "她买了一个手机配件。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "acclaim",
+      "phonetic": "/əˈkleɪm/",
+      "pos": "v.",
+      "meaning": "称赞；欢呼",
+      "example": "The film was widely acclaimed.",
+      "exampleTranslation": "这部电影广受赞誉。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "accord",
+      "phonetic": "/əˈkɔːd/",
+      "pos": "n.",
+      "meaning": "一致；协议",
+      "example": "The two sides reached an accord.",
+      "exampleTranslation": "双方达成协议。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "accountable",
+      "phonetic": "/əˈkaʊntəbl/",
+      "pos": "adj.",
+      "meaning": "负有责任的",
+      "example": "Managers are accountable for results.",
+      "exampleTranslation": "经理对结果负责。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "accumulate",
+      "phonetic": "/əˈkjuːmjəleɪt/",
+      "pos": "v.",
+      "meaning": "积累；堆积",
+      "example": "Dust accumulated on the shelves.",
+      "exampleTranslation": "架子上积了灰。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "acute",
+      "phonetic": "/əˈkjuːt/",
+      "pos": "adj.",
+      "meaning": "敏锐的；急性的；严重的",
+      "example": "She has an acute sense of smell.",
+      "exampleTranslation": "她嗅觉敏锐。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adhere",
+      "phonetic": "/ədˈhɪə/",
+      "pos": "v.",
+      "meaning": "坚持；粘附；遵守",
+      "example": "We must adhere to the rules.",
+      "exampleTranslation": "我们必须遵守规则。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adjacent",
+      "phonetic": "/əˈdʒeɪsnt/",
+      "pos": "adj.",
+      "meaning": "邻近的；毗连的",
+      "example": "The hotel is adjacent to the station.",
+      "exampleTranslation": "酒店紧邻车站。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "advent",
+      "phonetic": "/ˈædvent/",
+      "pos": "n.",
+      "meaning": "出现；到来",
+      "example": "The advent of the internet changed everything.",
+      "exampleTranslation": "互联网的出现改变了一切。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adverse",
+      "phonetic": "/ˈædvɜːs/",
+      "pos": "adj.",
+      "meaning": "不利的；相反的",
+      "example": "Adverse weather delayed the flight.",
+      "exampleTranslation": "恶劣天气延误了航班。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "aesthetic",
+      "phonetic": "/iːsˈθetɪk/",
+      "pos": "adj.",
+      "meaning": "美学的；审美的",
+      "example": "The building has aesthetic value.",
+      "exampleTranslation": "这座建筑有美学价值。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "affiliate",
+      "phonetic": "/əˈfɪlieɪt/",
+      "pos": "v.",
+      "meaning": "使隶属；使附属",
+      "example": "The clinic is affiliated with the university.",
+      "exampleTranslation": "该诊所隶属于这所大学。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "aggravate",
+      "phonetic": "/ˈæɡrəveɪt/",
+      "pos": "v.",
+      "meaning": "加重；恶化；激怒",
+      "example": "Stress can aggravate the illness.",
+      "exampleTranslation": "压力会加重病情。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "aggregate",
+      "phonetic": "/ˈæɡrɪɡət/",
+      "pos": "n.",
+      "meaning": "总计；合计",
+      "example": "The aggregate of all costs is high.",
+      "exampleTranslation": "所有成本总计很高。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "alienate",
+      "phonetic": "/ˈeɪliəneɪt/",
+      "pos": "v.",
+      "meaning": "使疏远；使异化",
+      "example": "His remarks alienated his friends.",
+      "exampleTranslation": "他的话疏远了朋友。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "allege",
+      "phonetic": "/əˈledʒ/",
+      "pos": "v.",
+      "meaning": "断言；指称",
+      "example": "He is alleged to have stolen the money.",
+      "exampleTranslation": "据称他偷了那笔钱。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "alleviate",
+      "phonetic": "/əˈliːvieɪt/",
+      "pos": "v.",
+      "meaning": "减轻；缓解",
+      "example": "The medicine alleviated the pain.",
+      "exampleTranslation": "药物减轻了疼痛。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "allocate",
+      "phonetic": "/ˈæləkeɪt/",
+      "pos": "v.",
+      "meaning": "分配；拨给",
+      "example": "The funds were allocated to schools.",
+      "exampleTranslation": "资金被拨给了学校。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "ambiguous",
+      "phonetic": "/æmˈbɪɡjuəs/",
+      "pos": "adj.",
+      "meaning": "模糊的；歧义的",
+      "example": "The wording is ambiguous.",
+      "exampleTranslation": "措辞含糊。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "amend",
+      "phonetic": "/əˈmend/",
+      "pos": "v.",
+      "meaning": "修正；修改",
+      "example": "The constitution was amended.",
+      "exampleTranslation": "宪法被修改了。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "amplify",
+      "phonetic": "/ˈæmplɪfaɪ/",
+      "pos": "v.",
+      "meaning": "放大；增强；详述",
+      "example": "The signal was amplified.",
+      "exampleTranslation": "信号被放大了。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "analogy",
+      "phonetic": "/əˈnælədʒi/",
+      "pos": "n.",
+      "meaning": "类比；类推",
+      "example": "He drew an analogy between them.",
+      "exampleTranslation": "他在两者之间作了类比。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "anonymous",
+      "phonetic": "/əˈnɒnɪməs/",
+      "pos": "adj.",
+      "meaning": "匿名的；无名的",
+      "example": "The donor wishes to remain anonymous.",
+      "exampleTranslation": "捐赠者希望匿名。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "anthropology",
+      "phonetic": "/ˌænθrəˈpɒlədʒi/",
+      "pos": "n.",
+      "meaning": "人类学",
+      "example": "She studies anthropology.",
+      "exampleTranslation": "她研究人类学。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "apparatus",
+      "phonetic": "/ˌæpəˈreɪtəs/",
+      "pos": "n.",
+      "meaning": "器械；装置；机构",
+      "example": "The lab has modern apparatus.",
+      "exampleTranslation": "实验室有现代设备。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "arbitrary",
+      "phonetic": "/ˈɑːbɪtrəri/",
+      "pos": "adj.",
+      "meaning": "任意的；武断的",
+      "example": "The decision seemed arbitrary.",
+      "exampleTranslation": "这个决定显得武断。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "articulate",
+      "phonetic": "/ɑːˈtɪkjuleɪt/",
+      "pos": "v.",
+      "meaning": "清晰表达；明确阐述",
+      "example": "She articulated her views clearly.",
+      "exampleTranslation": "她清晰地表达了自己的观点。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "ascertain",
+      "phonetic": "/ˌæsəˈteɪn/",
+      "pos": "v.",
+      "meaning": "查明；确定",
+      "example": "We must ascertain the facts.",
+      "exampleTranslation": "我们必须查明事实。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "aspire",
+      "phonetic": "/əˈspaɪə/",
+      "pos": "v.",
+      "meaning": "渴望；追求",
+      "example": "She aspires to be a doctor.",
+      "exampleTranslation": "她渴望成为医生。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "assemble",
+      "phonetic": "/əˈsembl/",
+      "pos": "v.",
+      "meaning": "集合；装配；聚集",
+      "example": "The workers assembled the machine.",
+      "exampleTranslation": "工人们装配了这台机器。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "assert",
+      "phonetic": "/əˈsɜːt/",
+      "pos": "v.",
+      "meaning": "断言；主张；维护",
+      "example": "He asserted his innocence.",
+      "exampleTranslation": "他坚称自己无罪。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "assimilate",
+      "phonetic": "/əˈsɪməleɪt/",
+      "pos": "v.",
+      "meaning": "吸收；同化；理解",
+      "example": "Immigrants assimilate over time.",
+      "exampleTranslation": "移民会逐渐同化。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "attain",
+      "phonetic": "/əˈteɪn/",
+      "pos": "v.",
+      "meaning": "达到；获得",
+      "example": "He attained his goal.",
+      "exampleTranslation": "他达到了目标。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "attribute",
+      "phonetic": "/əˈtrɪbjuːt/",
+      "pos": "v.",
+      "meaning": "把…归因于",
+      "example": "She attributes her success to luck.",
+      "exampleTranslation": "她把成功归因于运气。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "authentic",
+      "phonetic": "/ɔːˈθentɪk/",
+      "pos": "adj.",
+      "meaning": "真正的；可信的",
+      "example": "This is an authentic painting.",
+      "exampleTranslation": "这是一幅真迹。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "autonomy",
+      "phonetic": "/ɔːˈtɒnəmi/",
+      "pos": "n.",
+      "meaning": "自治；自主权",
+      "example": "The region enjoys autonomy.",
+      "exampleTranslation": "该地区享有自治权。",
+      "difficulty": 5
+    }
+  ]
+}

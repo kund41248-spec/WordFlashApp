@@ -1,0 +1,369 @@
+{
+  "name": "考研核心词汇",
+  "description": "考研英语学术高频词（示例包）",
+  "category": "KAOYAN",
+  "version": 1,
+  "sortOrder": 3,
+  "words": [
+    {
+      "spelling": "abnormal",
+      "phonetic": "/æbˈnɔːml/",
+      "pos": "adj.",
+      "meaning": "反常的；异常的",
+      "example": "The test showed abnormal results.",
+      "exampleTranslation": "测试显示结果异常。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "abolition",
+      "phonetic": "/ˌæbəˈlɪʃn/",
+      "pos": "n.",
+      "meaning": "废除；废止",
+      "example": "The abolition of slavery took decades.",
+      "exampleTranslation": "废除奴隶制历时数十年。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "abound",
+      "phonetic": "/əˈbaʊnd/",
+      "pos": "v.",
+      "meaning": "大量存在；富于",
+      "example": "Rumors abound in the office.",
+      "exampleTranslation": "办公室里谣言四起。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "abstraction",
+      "phonetic": "/æbˈstrækʃn/",
+      "pos": "n.",
+      "meaning": "抽象；抽象概念",
+      "example": "This is pure abstraction.",
+      "exampleTranslation": "这纯粹是抽象概念。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "acceleration",
+      "phonetic": "/əkˌseləˈreɪʃn/",
+      "pos": "n.",
+      "meaning": "加速；加速度",
+      "example": "The acceleration was impressive.",
+      "exampleTranslation": "加速表现令人印象深刻。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "accessible",
+      "phonetic": "/əkˈsesəbl/",
+      "pos": "adj.",
+      "meaning": "可接近的；易得到的",
+      "example": "The data is freely accessible.",
+      "exampleTranslation": "这些数据可免费获取。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "acclaim",
+      "phonetic": "/əˈkleɪm/",
+      "pos": "n.",
+      "meaning": "赞誉；喝彩",
+      "example": "The novel won critical acclaim.",
+      "exampleTranslation": "这部小说赢得了评论界赞誉。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "accordance",
+      "phonetic": "/əˈkɔːdns/",
+      "pos": "n.",
+      "meaning": "一致；符合",
+      "example": "Act in accordance with the law.",
+      "exampleTranslation": "依法行事。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "accountability",
+      "phonetic": "/əˌkaʊntəˈbɪləti/",
+      "pos": "n.",
+      "meaning": "问责制；负有责任",
+      "example": "Accountability is essential in government.",
+      "exampleTranslation": "问责制在政府中至关重要。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "acquisition",
+      "phonetic": "/ˌækwɪˈzɪʃn/",
+      "pos": "n.",
+      "meaning": "获得；收购；习得",
+      "example": "Language acquisition begins early.",
+      "exampleTranslation": "语言习得开始得很早。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adaptation",
+      "phonetic": "/ˌædæpˈteɪʃn/",
+      "pos": "n.",
+      "meaning": "适应；改编本",
+      "example": "The film is an adaptation of a novel.",
+      "exampleTranslation": "这部电影改编自一部小说。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adjustment",
+      "phonetic": "/əˈdʒʌstmənt/",
+      "pos": "n.",
+      "meaning": "调整；调节",
+      "example": "A small adjustment fixed the problem.",
+      "exampleTranslation": "一个小小的调整解决了问题。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "administration",
+      "phonetic": "/ədˌmɪnɪˈstreɪʃn/",
+      "pos": "n.",
+      "meaning": "管理；行政；政府",
+      "example": "She works in administration.",
+      "exampleTranslation": "她从事行政工作。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "adolescent",
+      "phonetic": "/ˌædəˈlesnt/",
+      "pos": "n.",
+      "meaning": "青少年",
+      "example": "Adolescents need guidance.",
+      "exampleTranslation": "青少年需要引导。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "advent",
+      "phonetic": "/ˈædvent/",
+      "pos": "n.",
+      "meaning": "出现；到来",
+      "example": "The advent of AI transformed industry.",
+      "exampleTranslation": "人工智能的出现改变了工业。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "adverse",
+      "phonetic": "/ˈædvɜːs/",
+      "pos": "adj.",
+      "meaning": "不利的；有害的",
+      "example": "Adverse effects were reported.",
+      "exampleTranslation": "有不良反应的报道。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "advocacy",
+      "phonetic": "/ˈædvəkəsi/",
+      "pos": "n.",
+      "meaning": "拥护；倡导",
+      "example": "She works in environmental advocacy.",
+      "exampleTranslation": "她从事环保倡导工作。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "aesthetic",
+      "phonetic": "/iːsˈθetɪk/",
+      "pos": "adj.",
+      "meaning": "审美的；美学的",
+      "example": "Aesthetic considerations matter here.",
+      "exampleTranslation": "这里审美考量很重要。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "affiliation",
+      "phonetic": "/əˌfɪliˈeɪʃn/",
+      "pos": "n.",
+      "meaning": "隶属；附属关系",
+      "example": "Please state your affiliation.",
+      "exampleTranslation": "请说明你的所属机构。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "aggregate",
+      "phonetic": "/ˈæɡrɪɡət/",
+      "pos": "adj.",
+      "meaning": "总计的；聚合的",
+      "example": "The aggregate demand rose.",
+      "exampleTranslation": "总需求上升了。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "alienation",
+      "phonetic": "/ˌeɪliəˈneɪʃn/",
+      "pos": "n.",
+      "meaning": "疏远；异化",
+      "example": "Urban life can cause alienation.",
+      "exampleTranslation": "城市生活可能导致疏离感。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "allocation",
+      "phonetic": "/ˌæləˈkeɪʃn/",
+      "pos": "n.",
+      "meaning": "分配；配给",
+      "example": "The allocation of resources is unfair.",
+      "exampleTranslation": "资源分配不公平。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "alteration",
+      "phonetic": "/ˌɔːltəˈreɪʃn/",
+      "pos": "n.",
+      "meaning": "改变；修改",
+      "example": "No alteration is allowed.",
+      "exampleTranslation": "不允许做任何改动。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "ambiguity",
+      "phonetic": "/ˌæmbɪˈɡjuːəti/",
+      "pos": "n.",
+      "meaning": "歧义；含糊",
+      "example": "The ambiguity caused confusion.",
+      "exampleTranslation": "歧义引起了混乱。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "amendment",
+      "phonetic": "/əˈmendmənt/",
+      "pos": "n.",
+      "meaning": "修正案；修改",
+      "example": "The amendment was passed.",
+      "exampleTranslation": "修正案获得通过。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "analytical",
+      "phonetic": "/ˌænəˈlɪtɪkl/",
+      "pos": "adj.",
+      "meaning": "分析的；解析的",
+      "example": "She has strong analytical skills.",
+      "exampleTranslation": "她有很强的分析能力。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "anonymous",
+      "phonetic": "/əˈnɒnɪməs/",
+      "pos": "adj.",
+      "meaning": "匿名的",
+      "example": "The author remains anonymous.",
+      "exampleTranslation": "作者仍然匿名。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "anticipation",
+      "phonetic": "/ænˌtɪsɪˈpeɪʃn/",
+      "pos": "n.",
+      "meaning": "预期；期望",
+      "example": "There was great anticipation.",
+      "exampleTranslation": "人们满怀期待。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "apparatus",
+      "phonetic": "/ˌæpəˈreɪtəs/",
+      "pos": "n.",
+      "meaning": "仪器；机构",
+      "example": "The apparatus is fragile.",
+      "exampleTranslation": "这台仪器很易碎。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "applicable",
+      "phonetic": "/əˈplɪkəbl/",
+      "pos": "adj.",
+      "meaning": "适用的；可应用的",
+      "example": "This rule is applicable to all.",
+      "exampleTranslation": "此规则适用于所有人。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "arbitrary",
+      "phonetic": "/ˈɑːbɪtrəri/",
+      "pos": "adj.",
+      "meaning": "任意的；专断的",
+      "example": "The choice was arbitrary.",
+      "exampleTranslation": "这个选择很随意。",
+      "difficulty": 4
+    },
+    {
+      "spelling": "articulation",
+      "phonetic": "/ɑːˌtɪkjuˈleɪʃn/",
+      "pos": "n.",
+      "meaning": "表达；发音；关节",
+      "example": "Clear articulation is important.",
+      "exampleTranslation": "清晰表达很重要。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "assessment",
+      "phonetic": "/əˈsesmənt/",
+      "pos": "n.",
+      "meaning": "评估；评价",
+      "example": "The assessment takes a week.",
+      "exampleTranslation": "评估需要一周。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "assumption",
+      "phonetic": "/əˈsʌmpʃn/",
+      "pos": "n.",
+      "meaning": "假设；承担",
+      "example": "That assumption may be wrong.",
+      "exampleTranslation": "那个假设可能是错的。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "attainment",
+      "phonetic": "/əˈteɪnmənt/",
+      "pos": "n.",
+      "meaning": "成就；达到",
+      "example": "Educational attainment rose.",
+      "exampleTranslation": "教育水平提高了。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "attribution",
+      "phonetic": "/ˌætrɪˈbjuːʃn/",
+      "pos": "n.",
+      "meaning": "归因；归属",
+      "example": "Attribution of the work is disputed.",
+      "exampleTranslation": "作品的归属存在争议。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "authenticity",
+      "phonetic": "/ˌɔːθenˈtɪsəti/",
+      "pos": "n.",
+      "meaning": "真实性；可靠性",
+      "example": "The authenticity was verified.",
+      "exampleTranslation": "真实性已得到验证。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "autonomous",
+      "phonetic": "/ɔːˈtɒnəməs/",
+      "pos": "adj.",
+      "meaning": "自治的；自主的",
+      "example": "They are an autonomous body.",
+      "exampleTranslation": "他们是一个自治机构。",
+      "difficulty": 5
+    },
+    {
+      "spelling": "bias",
+      "phonetic": "/ˈbaɪəs/",
+      "pos": "n.",
+      "meaning": "偏见；偏差",
+      "example": "The study has a sampling bias.",
+      "exampleTranslation": "这项研究存在抽样偏差。",
+      "difficulty": 3
+    },
+    {
+      "spelling": "bureaucracy",
+      "phonetic": "/bjʊəˈrɒkrəsi/",
+      "pos": "n.",
+      "meaning": "官僚制度；官僚机构",
+      "example": "Bureaucracy slows everything down.",
+      "exampleTranslation": "官僚作风拖慢了一切。",
+      "difficulty": 5
+    }
+  ]
+}

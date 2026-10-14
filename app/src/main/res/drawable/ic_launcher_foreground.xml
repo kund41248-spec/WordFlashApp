@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应图标的前景层。
+  108dp 画布，中心 72dp 为安全区（系统可能裁切成圆形/方形/水滴形）。
+  因此内容必须画在中心 66dp 以内 —— 这里用一个书页 + 记忆曲线的组合。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 书页外形（圆角矩形） -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,30 h36 a4,4 0 0 1 4,4 v40 a4,4 0 0 1 -4,4 h-36 a4,4 0 0 1 -4,-4 v-40 a4,4 0 0 1 4,-4 z" />
+
+    <!-- 书脊 -->
+    <path
+        android:fillColor="#4F6BED"
+        android:pathData="M40,30 h3 v48 h-3 z" />
+
+    <!-- 三行"文字"，用横线表示 -->
+    <path
+        android:fillColor="#4F6BED"
+        android:pathData="M48,42 h22 v3 h-22 z" />
+    <path
+        android:fillColor="#9AA8F0"
+        android:pathData="M48,51 h18 v3 h-18 z" />
+    <path
+        android:fillColor="#9AA8F0"
+        android:pathData="M48,60 h14 v3 h-14 z" />
+
+    <!-- 右下角的记忆曲线点缀 -->
+    <path
+        android:fillColor="#00A88C"
+        android:pathData="M62,68 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
+</vector>

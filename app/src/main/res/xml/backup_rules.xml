@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  云备份 / adb backup 规则（Android 11 及以下）。
+
+  原则：只备份「丢了会让用户心疼」的数据 —— 学习进度、统计数据、用户设置。
+
+  ⚠️ 注意：exclude 只能作用于已被 include 的路径。
+  若某个 domain 没有写 include，它会按系统默认处理，
+  此时为它写 exclude 会触发 lint 错误：
+      "xxx is not in an included path [FullBackupContent]"
+-->
+<full-backup-content>
+    <!-- 数据库：学习进度、统计、生词本、收藏 -->
+    <include domain="database" path="." />
+
+    <!-- 用户设置。DataStore Preferences 实际存放在 files/datastore/ 下，
+         所以 include 的是这个子目录，而不是整个 file 域 -->
+    <include domain="file" path="datastore" />
+
+    <!-- 共享首选项（当前未用到，保留以备将来） -->
+    <include domain="sharedpref" path="." />
+</full-backup-content>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应图标的背景层（API 26+）。
+  品牌蓝渐变，从左上到右下。
+
+  注意：aapt 命名空间声明在根元素上，这是 AAPT2 的惯例做法。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path android:pathData="M0,0 h108 v108 h-108 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="0"
+                android:startY="0"
+                android:endX="108"
+                android:endY="108">
+                <item android:offset="0" android:color="#5B7BF5" />
+                <item android:offset="1" android:color="#3A52C9" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

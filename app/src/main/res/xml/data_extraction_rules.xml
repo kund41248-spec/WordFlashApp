@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  数据提取规则（Android 12+ 使用，替代 backup_rules.xml）。
+
+  cloud-backup    : 云备份
+  device-transfer : 换机时的设备间迁移
+
+  两处都只纳入用户真正在乎的数据：学习进度、统计、设置。
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="database" path="." />
+        <!-- DataStore 设置存放位置 -->
+        <include domain="file" path="datastore" />
+        <include domain="sharedpref" path="." />
+    </cloud-backup>
+
+    <device-transfer>
+        <include domain="database" path="." />
+        <include domain="file" path="datastore" />
+        <include domain="sharedpref" path="." />
+    </device-transfer>
+</data-extraction-rules>
