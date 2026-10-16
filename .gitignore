@@ -5,6 +5,10 @@
 # ---------- 构建产物 ----------
 *.iml
 .gradle
+.kotlin
+
+# 临时放提交信息的文件，避免用 git add -A 时被误提交
+_commit_msg*.txt
 /build
 /app/build
 /captures
