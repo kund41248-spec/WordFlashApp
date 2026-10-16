@@ -47,10 +47,47 @@ data class WordMark(
     @ColumnInfo(name = "note")
     val note: String = "",
 
+    /**
+     * 错因，自由文本。如「拼写记错」「和 adapt 混了」。
+     *
+     * 只对错题本里的词有意义。用自由文本而不是预设枚举，
+     * 因为每个人记错的原因千奇百怪，预设选项永远不够用；
+     * 需要归类时靠 [wrongTags] 解决。
+     */
+    @ColumnInfo(name = "wrong_reason")
+    val wrongReason: String = "",
+
+    /**
+     * 自定义标签，多个用「;」分隔，如 `形近词;高频`。
+     *
+     * 存成一个字符串而不是建关联表，是权衡后的选择：
+     * 标签只用于筛选和展示，没有「重命名标签」这类需要一致性的操作，
+     * 为它多两张表和一次 JOIN 不划算。分隔符选分号是因为
+     * 用户给标签起名时几乎不会用到它。
+     */
+    @ColumnInfo(name = "wrong_tags")
+    val wrongTags: String = "",
+
     @ColumnInfo(name = "updated_at")
     val updatedAt: Long = System.currentTimeMillis()
 ) {
-    /** 两个标记都没打时，这行记录可以安全删除，避免表膨胀 */
+    /** 两个标记都没打、也没写任何内容时，这行记录可以安全删除，避免表膨胀 */
     val isEmpty: Boolean
-        get() = !isFavorite && !isInWordbook && note.isBlank()
+        get() = !isFavorite && !isInWordbook &&
+            note.isBlank() && wrongReason.isBlank() && wrongTags.isBlank()
+
+    /** 标签列表，已去掉空项 */
+    val tagList: List<String>
+        get() = wrongTags.split(TAG_SEPARATOR).map { it.trim() }.filter { it.isNotEmpty() }
+
+    companion object {
+        const val TAG_SEPARATOR = ";"
+
+        /** 把标签列表拼回存储格式，顺带去重和去空 */
+        fun joinTags(tags: List<String>): String =
+            tags.map { it.trim() }
+                .filter { it.isNotEmpty() }
+                .distinct()
+                .joinToString(TAG_SEPARATOR.toString())
+    }
 }

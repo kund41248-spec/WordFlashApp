@@ -110,6 +110,23 @@ class StudyRepository @Inject constructor(
     suspend fun removeFromWrongBook(wordId: Long) =
         progressDao.removeFromWrongBook(wordId)
 
+    /**
+     * 手动把单词加进错题本。
+     *
+     * 用于「练习时答错自动收录」之外的两条路径：
+     * 用户在单词列表里手动收录，以及从错题本页面的「添加单词」入口收录。
+     */
+    suspend fun addToWrongBook(wordId: Long) =
+        progressDao.addToWrongBook(wordId)
+
+    /** 批量收进错题本 */
+    suspend fun addAllToWrongBook(wordIds: List<Long>) =
+        progressDao.addAllToWrongBook(wordIds)
+
+    /** 批量移出错题本 */
+    suspend fun removeAllFromWrongBook(wordIds: List<Long>) =
+        progressDao.removeAllFromWrongBook(wordIds)
+
     /** 清空错题本，返回移除数量 */
     suspend fun clearWrongBook(): Int = progressDao.clearWrongBook()
 
@@ -143,5 +160,64 @@ class StudyRepository @Inject constructor(
             )
         )
         markDao.deleteIfEmpty(wordId)
+    }
+
+    // ============================================================
+    // 错因与标签（错题本用）
+    // ============================================================
+
+    /** 带错因/标签的标记行，key = wordId，供错题本列表附加显示 */
+    fun observeMarksWithWrongMeta(): Flow<List<WordMark>> =
+        markDao.observeMarksWithWrongMeta()
+
+    /** 曾用过的标签，供筛选面板列出候选 */
+    fun observeAllWrongTags(): Flow<List<String>> = markDao.observeAllWrongTags()
+
+    /**
+     * 保存错因。传空串表示清空。
+     * 界面上的输入框每次失焦/确认都会调它。
+     */
+    suspend fun saveWrongReason(wordId: Long, reason: String) =
+        markDao.saveWrongMeta(wordId = wordId, reason = reason)
+
+    /** 保存标签。传列表，内部按分号拼好；传空列表即清空 */
+    suspend fun saveWrongTags(wordId: Long, tags: List<String>) =
+        markDao.saveWrongMeta(wordId = wordId, tags = WordMark.joinTags(tags))
+
+    /**
+     * 给单词追加一个标签（已存在则忽略）。
+     *
+     * 「标记薄弱」就是往标签里加一个约定名 —— 见 [TAG_WEAK]。
+     * 之所以不给「掌握/薄弱」单独建字段：它本质就是一个分类标签，
+     * 复用标签机制后，用户还能自己再加「易混」「考前必看」之类，
+     * 不必每加一种分类就改一次数据库。
+     */
+    suspend fun addWrongTag(wordId: Long, tag: String) {
+        val existing = markDao.getMark(wordId)
+        val current = existing?.tagList ?: emptyList()
+        if (current.any { it.equals(tag, ignoreCase = true) }) return
+        markDao.saveWrongMeta(
+            wordId = wordId,
+            tags = WordMark.joinTags(current + tag)
+        )
+    }
+
+    /** 移除某个标签 */
+    suspend fun removeWrongTag(wordId: Long, tag: String) {
+        val existing = markDao.getMark(wordId) ?: return
+        markDao.saveWrongMeta(
+            wordId = wordId,
+            tags = WordMark.joinTags(
+                existing.tagList.filterNot { it.equals(tag, ignoreCase = true) }
+            )
+        )
+    }
+
+    companion object {
+        /** 「薄弱」标签 —— 用户主动标记需要重点攻克的词 */
+        const val TAG_WEAK = "薄弱"
+
+        /** 「已掌握」标签 —— 用户主动标记，用于和「移出错题本」区分开 */
+        const val TAG_MASTERED = "已掌握"
     }
 }

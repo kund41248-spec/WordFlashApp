@@ -243,6 +243,51 @@ interface ProgressDao {
     @Query("UPDATE word_progress SET is_in_wrong_book = 0 WHERE word_id = :wordId")
     suspend fun removeFromWrongBook(wordId: Long)
 
+    /**
+     * 手动把单词加进错题本。
+     *
+     * 与答错自动收录的区别：不改动 [WordProgress.wrongCount]。
+     * wrongCount 是**正确率的分母**，用户手动收录一个还没做过题的词时
+     * 并没有答错，把它计成错误会让统计失真。
+     *
+     * [lastWrongAt] 只在原本为 0 时补上当前时间，
+     * 让手动收录的词也能排进「最近答错」的顺序里。
+     */
+    @Transaction
+    suspend fun addToWrongBook(wordId: Long, now: Long = System.currentTimeMillis()) {
+        val existing = getProgress(wordId)
+        if (existing == null) {
+            // 这个词从未学过，没有进度行可更新 —— 先造一条
+            upsertProgress(
+                WordProgress(
+                    wordId = wordId,
+                    state = WordState.NEW,
+                    lastWrongAt = now,
+                    isInWrongBook = true
+                )
+            )
+        } else {
+            upsertProgress(
+                existing.copy(
+                    isInWrongBook = true,
+                    lastWrongAt = if (existing.lastWrongAt == 0L) now else existing.lastWrongAt
+                )
+            )
+        }
+    }
+
+    /** 批量收进错题本，用于多选操作 */
+    @Transaction
+    suspend fun addAllToWrongBook(wordIds: List<Long>, now: Long = System.currentTimeMillis()) {
+        wordIds.forEach { addToWrongBook(it, now) }
+    }
+
+    /** 批量移出错题本 */
+    @Transaction
+    suspend fun removeAllFromWrongBook(wordIds: List<Long>) {
+        wordIds.forEach { removeFromWrongBook(it) }
+    }
+
     /** 清空错题本，返回受影响行数 */
     @Query("UPDATE word_progress SET is_in_wrong_book = 0 WHERE is_in_wrong_book = 1")
     suspend fun clearWrongBook(): Int

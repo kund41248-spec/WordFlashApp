@@ -26,7 +26,7 @@ interface MarkDao {
 
     /**
      * 标记清空时删除整行，保持表精简。
-     * 只删「既没收藏、也没进生词本、也没笔记」的行。
+     * 只删「既没收藏、也没进生词本、也没任何笔记/错因/标签」的行。
      */
     @Query(
         """
@@ -35,9 +35,34 @@ interface MarkDao {
           AND is_favorite = 0
           AND is_in_wordbook = 0
           AND note = ''
+          AND wrong_reason = ''
+          AND wrong_tags = ''
         """
     )
     suspend fun deleteIfEmpty(wordId: Long)
+
+    /**
+     * 保存错题的「错因」和「标签」。
+     *
+     * 两个字段一起写，避免连续编辑时产生两次 upsert。
+     * 传 null 表示该字段不动，便于单独改其中一个。
+     */
+    @Transaction
+    suspend fun saveWrongMeta(
+        wordId: Long,
+        reason: String? = null,
+        tags: String? = null
+    ) {
+        val existing = getMark(wordId) ?: WordMark(wordId = wordId)
+        upsert(
+            existing.copy(
+                wrongReason = reason?.trim() ?: existing.wrongReason,
+                wrongTags = tags ?: existing.wrongTags,
+                updatedAt = System.currentTimeMillis()
+            )
+        )
+        deleteIfEmpty(wordId)
+    }
 
     // ============================================================
     // 收藏列表
@@ -84,6 +109,25 @@ interface MarkDao {
 
     @Query("SELECT COUNT(*) FROM word_mark WHERE is_in_wordbook = 1")
     fun observeWordbookCount(): Flow<Int>
+
+    /**
+     * 全部「有错因或标签」的标记行。
+     *
+     * 错题本页面需要把错因/标签附到每个词上显示，
+     * 并支持按它们筛选。只有被编辑过的词才有行，
+     * 通常远少于错题总数，所以整表取回再在内存里 indexBy 即可，
+     * 不必为它写 JOIN。
+     */
+    @Query("SELECT * FROM word_mark WHERE wrong_reason != '' OR wrong_tags != ''")
+    fun observeMarksWithWrongMeta(): Flow<List<WordMark>>
+
+    /** 一次性取回带错因/标签的标记行，用于导出等非响应式场景 */
+    @Query("SELECT * FROM word_mark WHERE wrong_reason != '' OR wrong_tags != ''")
+    suspend fun getMarksWithWrongMeta(): List<WordMark>
+
+    /** 曾用过的全部标签（含空行的已过滤），供筛选面板列出候选 */
+    @Query("SELECT wrong_tags FROM word_mark WHERE wrong_tags != ''")
+    fun observeAllWrongTags(): Flow<List<String>>
 
     /** 答错时自动加入生词本，保留已有收藏状态 */
     @Transaction

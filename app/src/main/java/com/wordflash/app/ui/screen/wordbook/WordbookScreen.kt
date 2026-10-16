@@ -1,6 +1,7 @@
 package com.wordflash.app.ui.screen.wordbook
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,18 +15,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -50,6 +58,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.wordflash.app.data.local.entity.Word
+import com.wordflash.app.data.repository.StudyRepository
 import com.wordflash.app.ui.components.EmptyState
 import com.wordflash.app.ui.navigation.Routes
 import com.wordflash.app.ui.theme.IncorrectRed
@@ -58,7 +67,7 @@ import com.wordflash.app.ui.theme.IncorrectRed
  * 「我的单词」页：错题本 / 生词本 / 收藏。
  *
  * 三个分页共用同一套布局，只是数据源不同。
- * 错题本额外显示错误次数，并提供「专项练习」入口。
+ * 错题本额外支持：错因、自定义标签、薄弱/掌握标记、按标签与错因筛选。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,12 +77,13 @@ fun WordbookScreen(
 ) {
     val ui by viewModel.uiState.collectAsStateWithLifecycle()
     var showClearDialog by remember { mutableStateOf(false) }
+    var tagEditorWordId by remember { mutableStateOf<Long?>(null) }
 
     if (showClearDialog) {
         AlertDialog(
             onDismissRequest = { showClearDialog = false },
             title = { Text("清空错题本？") },
-            text = { Text("会移除错题本里的全部单词。学习进度与统计数据不受影响。") },
+            text = { Text("会移除错题本里的全部单词。学习进度、错因和标签都会保留。") },
             confirmButton = {
                 TextButton(onClick = {
                     showClearDialog = false
@@ -84,6 +94,19 @@ fun WordbookScreen(
             },
             dismissButton = {
                 TextButton(onClick = { showClearDialog = false }) { Text("取消") }
+            }
+        )
+    }
+
+    // 标签编辑弹窗
+    tagEditorWordId?.let { wordId ->
+        TagEditorDialog(
+            initial = ui.wrongTags[wordId] ?: emptyList(),
+            allTags = ui.allTags,
+            onDismiss = { tagEditorWordId = null },
+            onSave = {
+                viewModel.saveTags(wordId, it)
+                tagEditorWordId = null
             }
         )
     }
@@ -112,8 +135,8 @@ fun WordbookScreen(
                 }
             }
 
-            // ---------- 错题本专属：专项练习 ----------
-            if (ui.tab == WordbookViewModel.Tab.WRONG && ui.wrongCount > 0) {
+            // ---------- 错题本专属操作区 ----------
+            if (ui.tab == WordbookViewModel.Tab.WRONG) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -126,22 +149,53 @@ fun WordbookScreen(
                             // 走导航参数传一长串 id 既冗长又容易出错
                             navController.navigate(Routes.practiceWrong())
                         },
+                        enabled = ui.wrongCount > 0,
                         modifier = Modifier.weight(1f)
                     ) {
                         Icon(Icons.Filled.PlayArrow, contentDescription = null)
                         Spacer(Modifier.size(6.dp))
                         Text("练习错题")
                     }
-                    OutlinedButton(onClick = { showClearDialog = true }) {
-                        Text("清空")
+                    // 手动往错题本里补词 —— 有些词是做错的题没覆盖到的
+                    OutlinedButton(
+                        onClick = {
+                            // 复用全局搜索页：选词后加入错题本
+                            navController.navigate(Routes.SEARCH_TO_WRONG_BOOK)
+                        }
+                    ) {
+                        Icon(Icons.Filled.Add, contentDescription = null)
+                        Spacer(Modifier.size(6.dp))
+                        Text("加词")
+                    }
+                    if (ui.wrongCount > 0) {
+                        OutlinedButton(onClick = { showClearDialog = true }) {
+                            Text("清空")
+                        }
                     }
                 }
                 Text(
-                    text = "答对的单词会自动移出错题本",
+                    text = "连续答对 2 次会自动移出错题本；也可以手动标记掌握",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
+                    modifier = Modifier.padding(horizontal = 16.dp)
                 )
+
+                // 快捷筛选
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    WordbookViewModel.WrongFilter.entries.forEach { f ->
+                        FilterChip(
+                            selected = ui.filter == f,
+                            onClick = { viewModel.setFilter(f) },
+                            label = { Text(f.label) }
+                        )
+                    }
+                }
             }
 
             // ---------- 搜索 ----------
@@ -152,7 +206,15 @@ fun WordbookScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 singleLine = true,
-                placeholder = { Text("搜索单词或释义") },
+                placeholder = {
+                    Text(
+                        if (ui.tab == WordbookViewModel.Tab.WRONG) {
+                            "搜索单词、释义、错因或标签"
+                        } else {
+                            "搜索单词或释义"
+                        }
+                    )
+                },
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) }
             )
 
@@ -178,8 +240,26 @@ fun WordbookScreen(
                             word = word,
                             tab = ui.tab,
                             wrongCount = ui.wrongCounts[word.id] ?: 0,
+                            wrongReason = ui.wrongReasons[word.id].orEmpty(),
+                            tags = ui.wrongTags[word.id].orEmpty(),
+                            isEditingReason = ui.editingReasonWordId == word.id,
                             onSpeak = { viewModel.speak(word.spelling) },
                             onToggleFavorite = { viewModel.toggleFavorite(word.id) },
+                            onStartEditReason = { viewModel.startEditingReason(word.id) },
+                            onCancelEditReason = { viewModel.stopEditingReason() },
+                            onSaveReason = { viewModel.saveReason(word.id, it) },
+                            onEditTags = { tagEditorWordId = word.id },
+                            onMarkWeak = {
+                                if (ui.wrongTags[word.id].orEmpty().any {
+                                        it.equals(StudyRepository.TAG_WEAK, ignoreCase = true)
+                                    }
+                                ) {
+                                    viewModel.unmarkWeak(word.id)
+                                } else {
+                                    viewModel.markWeak(word.id)
+                                }
+                            },
+                            onMarkMastered = { viewModel.markMastered(word.id) },
                             onRemove = {
                                 when (ui.tab) {
                                     WordbookViewModel.Tab.WRONG ->
@@ -200,14 +280,18 @@ fun WordbookScreen(
 
 private fun emptyTitle(ui: WordbookViewModel.UiState): String = when {
     ui.query.isNotBlank() -> "没有找到匹配的单词"
+    ui.tab == WordbookViewModel.Tab.WRONG &&
+        ui.filter != WordbookViewModel.WrongFilter.ALL -> "这个筛选下没有单词"
     ui.tab == WordbookViewModel.Tab.WRONG -> "错题本是空的"
     ui.tab == WordbookViewModel.Tab.WORDBOOK -> "生词本是空的"
     else -> "还没有收藏的单词"
 }
 
 private fun emptyDesc(ui: WordbookViewModel.UiState): String = when {
-    ui.query.isNotBlank() -> "换个关键词试试"
-    ui.tab == WordbookViewModel.Tab.WRONG -> "答题出错的单词会自动收进这里"
+    ui.query.isNotBlank() -> "换个关键词，或者试试按标签搜"
+    ui.tab == WordbookViewModel.Tab.WRONG &&
+        ui.filter != WordbookViewModel.WrongFilter.ALL -> "换个筛选条件看看"
+    ui.tab == WordbookViewModel.Tab.WRONG -> "答题出错的单词会自动收进这里，也可以手动添加"
     ui.tab == WordbookViewModel.Tab.WORDBOOK -> "在单词列表里点「加入生词本」手动收录"
     else -> "在学习时点星星即可收藏"
 }
@@ -217,12 +301,23 @@ private fun WordRow(
     word: Word,
     tab: WordbookViewModel.Tab,
     wrongCount: Int,
+    wrongReason: String,
+    tags: List<String>,
+    isEditingReason: Boolean,
     onSpeak: () -> Unit,
     onToggleFavorite: () -> Unit,
+    onStartEditReason: () -> Unit,
+    onCancelEditReason: () -> Unit,
+    onSaveReason: (String) -> Unit,
+    onEditTags: () -> Unit,
+    onMarkWeak: () -> Unit,
+    onMarkMastered: () -> Unit,
     onRemove: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     val isFavoriteTab = tab == WordbookViewModel.Tab.FAVORITE
+    val isWrongTab = tab == WordbookViewModel.Tab.WRONG
+    val isWeak = tags.any { it.equals(StudyRepository.TAG_WEAK, ignoreCase = true) }
 
     Card(
         modifier = Modifier
@@ -255,7 +350,7 @@ private fun WordRow(
                             )
                         }
                         // 错题本显示错误次数
-                        if (tab == WordbookViewModel.Tab.WRONG && wrongCount > 0) {
+                        if (isWrongTab && wrongCount > 0) {
                             Spacer(Modifier.size(8.dp))
                             Text(
                                 text = "错 $wrongCount 次",
@@ -270,6 +365,47 @@ private fun WordRow(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+
+                    // 标签行
+                    if (isWrongTab && tags.isNotEmpty()) {
+                        Spacer(Modifier.height(6.dp))
+                        Row(
+                            modifier = Modifier.horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            tags.forEach { tag ->
+                                AssistChip(
+                                    onClick = onEditTags,
+                                    label = { Text(tag) },
+                                    leadingIcon = if (tag.equals(
+                                            StudyRepository.TAG_WEAK,
+                                            ignoreCase = true
+                                        )
+                                    ) {
+                                        {
+                                            Icon(
+                                                Icons.Filled.Warning,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(14.dp)
+                                            )
+                                        }
+                                    } else {
+                                        null
+                                    }
+                                )
+                            }
+                        }
+                    }
+
+                    // 错因
+                    if (isWrongTab && wrongReason.isNotBlank() && !isEditingReason) {
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            text = "错因：$wrongReason",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = IncorrectRed
+                        )
+                    }
                 }
 
                 IconButton(onClick = onSpeak) {
@@ -303,21 +439,207 @@ private fun WordRow(
                 }
             }
 
-            if (expanded && word.example.isNotBlank()) {
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    text = word.example,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                if (word.exampleTranslation.isNotBlank()) {
+            // ---------- 展开区 ----------
+            if (expanded) {
+                if (word.example.isNotBlank()) {
+                    Spacer(Modifier.height(10.dp))
                     Text(
-                        text = word.exampleTranslation,
+                        text = word.example,
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurface
                     )
+                    if (word.exampleTranslation.isNotBlank()) {
+                        Text(
+                            text = word.exampleTranslation,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                // 错题本专属：错因编辑 + 薄弱/掌握/标签
+                if (isWrongTab) {
+                    Spacer(Modifier.height(10.dp))
+
+                    if (isEditingReason) {
+                        ReasonEditor(
+                            initial = wrongReason,
+                            onCancel = onCancelEditReason,
+                            onSave = onSaveReason
+                        )
+                    } else {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .horizontalScroll(rememberScrollState()),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            OutlinedButton(onClick = onStartEditReason) {
+                                Icon(
+                                    Icons.Filled.Edit,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(Modifier.size(4.dp))
+                                Text(if (wrongReason.isBlank()) "记错因" else "改错因")
+                            }
+                            OutlinedButton(onClick = onEditTags) {
+                                Text(if (tags.isEmpty()) "加标签" else "改标签")
+                            }
+                            OutlinedButton(onClick = onMarkWeak) {
+                                Icon(
+                                    Icons.Filled.Warning,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(Modifier.size(4.dp))
+                                Text(if (isWeak) "取消薄弱" else "标为薄弱")
+                            }
+                            OutlinedButton(onClick = onMarkMastered) {
+                                Icon(
+                                    Icons.Filled.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(Modifier.size(4.dp))
+                                Text("已掌握")
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+/** 错因内联编辑器 */
+@Composable
+private fun ReasonEditor(
+    initial: String,
+    onCancel: () -> Unit,
+    onSave: (String) -> Unit
+) {
+    var text by remember(initial) { mutableStateOf(initial) }
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        OutlinedTextField(
+            value = text,
+            onValueChange = { text = it },
+            modifier = Modifier.fillMaxWidth(),
+            label = { Text("错因") },
+            placeholder = { Text("例如：和 adapt 混了 / 拼写总漏一个字母") },
+            minLines = 2
+        )
+        Spacer(Modifier.height(6.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = { onSave(text) }) { Text("保存") }
+            OutlinedButton(onClick = onCancel) { Text("取消") }
+        }
+    }
+}
+
+/** 标签编辑弹窗：可删已有标签、加新标签、从历史标签里点选 */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun TagEditorDialog(
+    initial: List<String>,
+    allTags: List<String>,
+    onDismiss: () -> Unit,
+    onSave: (List<String>) -> Unit
+) {
+    var tags by remember { mutableStateOf(initial) }
+    var input by remember { mutableStateOf("") }
+
+    fun addTag(raw: String) {
+        val t = raw.trim()
+        if (t.isEmpty()) return
+        if (tags.any { it.equals(t, ignoreCase = true) }) return
+        tags = tags + t
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("标签") },
+        text = {
+            Column {
+                // 已有标签
+                if (tags.isNotEmpty()) {
+                    Text(
+                        text = "当前标签（点一下删除）",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    Row(
+                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        tags.forEach { tag ->
+                            AssistChip(
+                                onClick = { tags = tags.filterNot { it == tag } },
+                                label = { Text(tag) }
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(10.dp))
+                }
+
+                OutlinedTextField(
+                    value = input,
+                    onValueChange = { input = it },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    label = { Text("新标签") },
+                    placeholder = { Text("例如：形近词") },
+                    trailingIcon = {
+                        IconButton(onClick = {
+                            addTag(input)
+                            input = ""
+                        }) {
+                            Icon(Icons.Filled.Add, contentDescription = "添加")
+                        }
+                    }
+                )
+
+                // 历史标签快速点选
+                val suggestions = allTags.filter { s ->
+                    tags.none { it.equals(s, ignoreCase = true) }
+                }
+                if (suggestions.isNotEmpty()) {
+                    Spacer(Modifier.height(10.dp))
+                    Text(
+                        text = "用过的标签",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    Row(
+                        modifier = Modifier.horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        suggestions.forEach { s ->
+                            AssistChip(
+                                onClick = { addTag(s) },
+                                label = { Text(s) }
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                // 顺手把输入框里没提交的内容也带上，避免用户白打
+                val merged = if (input.isBlank()) tags else {
+                    (tags + input.trim()).distinct()
+                }
+                onSave(merged)
+            }) {
+                Text("保存")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("取消") }
+        }
+    )
 }

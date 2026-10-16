@@ -1,8 +1,5 @@
 package com.wordflash.app.ui.screen.createbook
 
-import android.content.Context
-import android.net.Uri
-import android.provider.OpenableColumns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wordflash.app.data.local.entity.BookCategory
@@ -10,26 +7,22 @@ import com.wordflash.app.data.local.entity.Word
 import com.wordflash.app.data.repository.WordRepository
 import com.wordflash.app.data.seed.DictPackDto
 import com.wordflash.app.data.seed.DictWordDto
-import com.wordflash.app.util.WordImporter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
  * 新建自定义词库。
  *
- * 支持三种录入方式，共用同一个预览与保存流程：
- * 1. **逐条添加** —— 填拼写 + 释义，点「添加」
- * 2. **粘贴批量** —— 一段文本，自动识别分隔符
- * 3. **选择文件** —— CSV / TXT / JSON（原「导入词库」功能合并到这里）
+ * 两种录入方式共用同一个预览与保存流程：
+ * 1. **逐个添加** —— 填拼写 + 释义，点「添加」
+ * 2. **批量粘贴** —— 一段文本，自动识别分隔符
  *
- * 三种方式的结果都汇入 [uiState].draftWords，最后统一保存。
+ * 两种方式的结果都汇入 [uiState].draftWords，最后统一保存。
  */
 @HiltViewModel
 class CreateBookViewModel @Inject constructor(
@@ -37,7 +30,6 @@ class CreateBookViewModel @Inject constructor(
 ) : ViewModel() {
 
     private companion object {
-        const val MAX_FILE_BYTES = 5 * 1024 * 1024L   // 5 MB
         const val MAX_PASTE_LINES = 5000
     }
 
@@ -220,72 +212,6 @@ class CreateBookViewModel @Inject constructor(
     /** 从文本里抠出 /.../ 形式的音标，若没有则返回空 */
     private fun extractPhonetic(text: String): String =
         Regex("""/[^/\s][^/]*/""").find(text)?.value.orEmpty()
-
-    // ---------- 文件导入 ----------
-
-    fun importFromFile(context: Context, uri: Uri) {
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                runCatching {
-                    val resolver = context.contentResolver
-                    val fileName = queryFileName(context, uri) ?: "未命名文件"
-                    val size = resolver.openAssetFileDescriptor(uri, "r")?.use { it.length } ?: -1L
-                    if (size > MAX_FILE_BYTES) {
-                        return@runCatching Triple(fileName, null, "文件过大（超过 5 MB）")
-                    }
-                    val content = resolver.openInputStream(uri)?.use { input ->
-                        input.bufferedReader(Charsets.UTF_8).readText()
-                    } ?: return@runCatching Triple(fileName, null, "无法读取文件")
-
-                    val suggested = fileName.substringBeforeLast('.')
-                    Triple(fileName, WordImporter.parse(content, suggested), null)
-                }.getOrElse { e ->
-                    Triple("", null, "读取失败：${e.message}")
-                }
-            }
-
-            val (fileName, parsed, readError) = result
-            if (readError != null) {
-                _uiState.update { it.copy(message = readError) }
-                return@launch
-            }
-            if (parsed == null || !parsed.isSuccess) {
-                _uiState.update { it.copy(message = parsed?.error ?: "解析失败") }
-                return@launch
-            }
-
-            val pack = parsed.pack!!
-            val existing = _uiState.value.draftWords.map { it.spelling }.toMutableSet()
-            val incoming = pack.words
-                .map {
-                    DraftWord(
-                        spelling = it.spelling.trim().lowercase(),
-                        meaning = it.meaning.trim(),
-                        phonetic = it.phonetic,
-                        example = it.example
-                    )
-                }
-                .filter { it.spelling.isNotEmpty() && it.meaning.isNotEmpty() }
-                .filter { existing.add(it.spelling) }
-
-            _uiState.update {
-                it.copy(
-                    // 文件名作为词库名的建议值，用户没填过才采用
-                    bookName = it.bookName.ifBlank { pack.name.ifBlank { fileName.substringBeforeLast('.') } },
-                    draftWords = it.draftWords + incoming,
-                    message = "从 $fileName 导入 ${incoming.size} 个单词"
-                )
-            }
-        }
-    }
-
-    private fun queryFileName(context: Context, uri: Uri): String? =
-        runCatching {
-            context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
-                val index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                if (index >= 0 && cursor.moveToFirst()) cursor.getString(index) else null
-            }
-        }.getOrNull()
 
     // ---------- 草稿管理 ----------
 

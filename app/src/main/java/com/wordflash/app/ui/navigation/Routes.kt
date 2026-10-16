@@ -8,8 +8,11 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
- * 全局路由表�? *
- * 学习页与结果页不放入底部导航，通过路由参数携带会话信息�? * 避免在导航层持有可变状态�? */
+ * 全局路由表。
+ *
+ * 学习页与结果页不放入底部导航，通过路由参数携带会话信息，
+ * 避免在导航层持有可变状态。
+ */
 object Routes {
     const val HOME = "home"
     const val BOOK_LIST = "book_list"
@@ -18,17 +21,27 @@ object Routes {
     const val SETTINGS = "settings"
     const val CREATE_BOOK = "create_book"
 
-    /** 学习页：需要词�?id 与学习模�?*/
+    /** 向已有词库追加单词：需要词库 id */
+    const val ADD_WORDS = "add_words/{bookId}"
+    fun addWords(bookId: Long) = "add_words/$bookId"
+
+    /** 搜索并加入错题本 */
+    const val SEARCH_TO_WRONG_BOOK = "search_to_wrong_book"
+
+    /** 学习页：需要词库 id 与学习模式 */
     const val STUDY = "study/{bookId}/{mode}"
     fun study(bookId: Long, mode: String) = "study/$bookId/$mode"
 
     /**
-     * 错题专项练习�?     *
-     * 不带参数 —�?错题列表由学习页自己查库�?     * 走导航参数传一长串 wordId 既冗长又容易超出路由长度限制�?     */
+     * 错题专项练习。
+     *
+     * 不带参数 —— 错题列表由学习页自己查库，
+     * 走导航参数传一长串 wordId 既冗长又容易超出路由长度限制。
+     */
     const val PRACTICE_WRONG = "practice_wrong/{mode}"
     fun practiceWrong(mode: String = "flashcard") = "practice_wrong/$mode"
 
-    /** 模式选择页：需要词�?id */
+    /** 模式选择页：需要词库 id */
     const val MODE_SELECT = "mode_select/{bookId}"
     fun modeSelect(bookId: Long) = "mode_select/$bookId"
 
@@ -37,13 +50,14 @@ object Routes {
     fun result(total: Int, correct: Int, durationMs: Long) =
         "result/$total/$correct/$durationMs"
 
-    /** 词库详情（查看某词库下的单词列表�?*/
+    /** 词库详情（查看某词库下的单词列表） */
     const val BOOK_DETAIL = "book_detail/{bookId}"
     fun bookDetail(bookId: Long) = "book_detail/$bookId"
 }
 
 /**
- * 底部导航项定义�? */
+ * 底部导航项定义。
+ */
 data class BottomNavItem(
     val route: String,
     val labelRes: Int,

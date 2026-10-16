@@ -32,7 +32,7 @@ import com.wordflash.app.data.local.entity.WordProgress
         DailyStats::class,
         WordMark::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -82,9 +82,31 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         /**
+         * v2 → v3：错题本支持「错因」与「自定义标签」。
+         *
+         * `word_mark` 增加两个字段：
+         * - `wrong_reason`  自由文本错因
+         * - `wrong_tags`    自定义标签，多个用分号分隔
+         *
+         * 两者默认空串，老用户的笔记、收藏、生词本标记全部原样保留。
+         */
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "ALTER TABLE word_mark " +
+                        "ADD COLUMN wrong_reason TEXT NOT NULL DEFAULT ''"
+                )
+                db.execSQL(
+                    "ALTER TABLE word_mark " +
+                        "ADD COLUMN wrong_tags TEXT NOT NULL DEFAULT ''"
+                )
+            }
+        }
+
+        /**
          * 数据库结构变更登记表。
          * 每次修改实体结构都要：version +1 并在此追加一个 Migration。
          */
-        val MIGRATIONS: Array<Migration> = arrayOf(MIGRATION_1_2)
+        val MIGRATIONS: Array<Migration> = arrayOf(MIGRATION_1_2, MIGRATION_2_3)
     }
 }

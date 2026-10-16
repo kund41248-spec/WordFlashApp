@@ -79,6 +79,15 @@ class StudySessionManager @Inject constructor(
     /** 每个词在本轮被重现的次数，用于给队列增长设上限 */
     private val repeatCount = hashMapOf<Long, Int>()
 
+    /**
+     * 每个词当前连续答对了几次，用于判断能否移出错题本。
+     *
+     * 只存在内存里，不落库：跨会话的连续性是靠 [WordProgress.repetitions]
+     * 维护的，这里统计的是**本轮会话内**的连续性 ——
+     * 一轮里连对两次，才认为这次是真的记住了。
+     */
+    private val currentStreak = hashMapOf<Long, Int>()
+
     // ============================================================
     // 会话生命周期
     // ============================================================
@@ -156,6 +165,7 @@ class StudySessionManager @Inject constructor(
         wrongWordIds.clear()
         progressWritten.clear()
         repeatCount.clear()
+        currentStreak.clear()
         _state.value = State()
     }
 
@@ -195,14 +205,27 @@ class StudySessionManager @Inject constructor(
         // 分工：错题本**自动**记录答错的词；生词本只由用户手动添加。
         // 因此这里不再往生词本塞东西，避免两个列表内容重复。
         //
-        // 答对即移出错题本 —— 背单词 App 的通行做法，
-        // 用户预期「练对了就不用再看到它」。
+        // 答对**连续 [WRONG_BOOK_GRADUATE_STREAK] 次**才移出错题本。
+        //
+        // 为什么不是答对一次就移出：一次答对可能只是蒙对或刚看过答案，
+        // 立刻移出会让错题本「漏掉」其实还没记住的词，
+        // 用户第二天再遇到它时又会答错，来回折腾。
+        // 连续答对才说明真的记住了 —— 这与市面错题本的通行做法一致。
         updated = if (isCorrect) {
-            // 答对：若之前在错题本里，移出。
+            // 答对：累计连续答对次数，达标才移出。
             // 注意 wrongCount 是只增不减的统计值，不在这里改动。
-            if (updated.isInWrongBook) updated.copy(isInWrongBook = false) else updated
+            val streak = currentStreak.getOrDefault(card.wordId, 0) + 1
+            currentStreak[card.wordId] = streak
+            if (updated.isInWrongBook && streak >= WRONG_BOOK_GRADUATE_STREAK) {
+                currentStreak.remove(card.wordId)
+                updated.copy(isInWrongBook = false)
+            } else {
+                updated
+            }
         } else {
-            // 答错：收进错题本，并刷新「最近答错时间」用于排序
+            // 答错：收进错题本，并刷新「最近答错时间」用于排序；
+            // 连续答对计数清零，从头再攒
+            currentStreak[card.wordId] = 0
             wrongWordIds += card.wordId
             updated.copy(isInWrongBook = true, lastWrongAt = now)
         }
@@ -298,5 +321,15 @@ class StudySessionManager @Inject constructor(
 
         /** 同一个词在一轮会话里最多重现几次，防止队列无限增长 */
         const val MAX_REPEAT_PER_WORD = 2
+
+        /**
+         * 连续答对几次才把单词移出错题本。
+         *
+         * 取 2 而不是 1：答对一次可能是蒙的或刚看过答案，
+         * 连对两次才足以说明记住了。也不宜更高 ——
+         * 错题本里的词通常已经会了，要求连对三次以上
+         * 会让用户觉得「怎么老是移不出去」。
+         */
+        const val WRONG_BOOK_GRADUATE_STREAK = 2
     }
 }

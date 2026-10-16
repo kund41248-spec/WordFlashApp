@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.wordflash.app.ui.screen.addwords.AddWordsScreen
 import com.wordflash.app.ui.screen.booklist.BookListScreen
 import com.wordflash.app.ui.screen.createbook.CreateBookScreen
 import com.wordflash.app.ui.screen.home.HomeScreen
@@ -27,12 +28,17 @@ import com.wordflash.app.ui.screen.stats.StatsScreen
 import com.wordflash.app.ui.screen.study.ModeSelectScreen
 import com.wordflash.app.ui.screen.study.StudyScreen
 import com.wordflash.app.ui.screen.wordbook.WordbookScreen
+import com.wordflash.app.ui.screen.wrongbooksearch.WrongBookSearchScreen
 
 /**
- * 搴旂敤涓诲鑸€? *
- * 搴曢儴瀵艰埅閲囩敤銆屽洖閫€鍒拌捣濮嬬洰鐨勫湴 + 鐘舵€佹仮澶嶃€嶇殑鏍囧噯妯″紡锛? * 鍙嶅鐐瑰嚮鍚屼竴 tab 涓嶄細鍫嗙Н鍥為€€鏍堬紝鍒囪蛋鍐嶅垏鍥炶兘淇濈暀婊氬姩浣嶇疆銆? *
- * 瀛︿範椤典笌缁撴灉椤?*涓嶆樉绀哄簳閮ㄥ鑸爮** 鈥斺€?瀛︿範鏃堕渶瑕佷笓娉紝
- * 涓斾腑閫斿垏 tab 浼氭墦鏂細璇濄€? */
+ * 应用主导航。
+ *
+ * 底部导航采用「回退到起始目的地 + 状态恢复」的标准模式：
+ * 反复点击同一 tab 不会堆积回退栈，切走再切回能保留滚动位置。
+ *
+ * 学习页与结果页**不显示底部导航栏** —— 学习时需要专注，
+ * 且中途切 tab 会打断会话。
+ */
 @Composable
 fun AppNavHost(
     navController: NavHostController = rememberNavController()
@@ -77,7 +83,7 @@ fun AppNavHost(
             startDestination = Routes.HOME,
             modifier = Modifier.padding(innerPadding)
         ) {
-            // ---------- 搴曢儴瀵艰埅鐨勫洓涓富椤甸潰 ----------
+            // ---------- 底部导航的五个主页面 ----------
             composable(Routes.HOME) { HomeScreen(navController) }
             composable(Routes.BOOK_LIST) { BookListScreen(navController) }
             composable(Routes.STATS) { StatsScreen(navController) }
@@ -85,7 +91,22 @@ fun AppNavHost(
             composable(Routes.SETTINGS) { SettingsScreen(navController) }
             composable(Routes.CREATE_BOOK) { CreateBookScreen(navController) }
 
-            // ---------- 閿欓涓撻」缁冧範 ----------
+            // ---------- 向已有词库追加单词 ----------
+            composable(
+                route = Routes.ADD_WORDS,
+                arguments = listOf(
+                    navArgument("bookId") { type = NavType.StringType }
+                )
+            ) {
+                AddWordsScreen(navController)
+            }
+
+            // ---------- 搜索并加入错题本 ----------
+            composable(Routes.SEARCH_TO_WRONG_BOOK) {
+                WrongBookSearchScreen(navController)
+            }
+
+            // ---------- 错题专项练习 ----------
             composable(
                 route = Routes.PRACTICE_WRONG,
                 arguments = listOf(
@@ -107,7 +128,7 @@ fun AppNavHost(
                 )
             }
 
-            // ---------- 妯″紡閫夋嫨 ----------
+            // ---------- 模式选择 ----------
             composable(
                 route = Routes.MODE_SELECT,
                 arguments = listOf(
@@ -118,7 +139,7 @@ fun AppNavHost(
                 ModeSelectScreen(bookId = bookId, navController = navController)
             }
 
-            // ---------- 瀛︿範椤?----------
+            // ---------- 学习页 ----------
             composable(
                 route = Routes.STUDY,
                 arguments = listOf(
@@ -134,7 +155,8 @@ fun AppNavHost(
                     modeKey = mode,
                     onBack = { navController.popBackStack() },
                     onFinished = { total, correct, durationMs ->
-                        // 缁撴灉椤电敤 replace 鑰岄潪 navigate锛?                        // 瀛﹀畬鍚庢寜杩斿洖閿簲璇ュ洖鍒版ā寮忛€夋嫨锛岃€屼笉鏄噸鏂拌繘鍏ュ涔犻〉
+                        // 结果页用 replace 而非 navigate：
+                        // 学完后按返回键应该回到模式选择，而不是重新进入学习页
                         navController.navigate(Routes.result(total, correct, durationMs)) {
                             popUpTo(Routes.STUDY) { inclusive = true }
                         }
@@ -142,7 +164,7 @@ fun AppNavHost(
                 )
             }
 
-            // ---------- 缁撴灉椤?----------
+            // ---------- 结果页 ----------
             composable(
                 route = Routes.RESULT,
                 arguments = listOf(
@@ -168,7 +190,8 @@ fun AppNavHost(
                         }
                     },
                     onStudyAgain = {
-                        // 鍥炲埌涓婁竴灞傦紙妯″紡閫夋嫨锛夛紝璁╃敤鎴烽噸鏂伴€夋ā寮忓啀瀛?                        navController.popBackStack()
+                        // 回到上一层（模式选择），让用户重新选模式再学
+                        navController.popBackStack()
                     },
                     onViewWordbook = {
                         navController.navigate(Routes.WORDBOOK) {

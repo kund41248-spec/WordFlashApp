@@ -100,6 +100,7 @@ fun BookListScreen(
                     book = book,
                     dueCount = dueCounts[book.id] ?: 0,
                     onClick = { navController.navigate(Routes.modeSelect(book.id)) },
+                    onAddWords = { navController.navigate(Routes.addWords(book.id)) },
                     onDelete = { viewModel.deleteBook(book) }
                 )
             }
@@ -132,7 +133,7 @@ private fun ImportButton(onClick: () -> Unit) {
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    text = "逐条输入 / 粘贴文本 / 从文件导入",
+                    text = "自己起个名字，把要背的单词加进去",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -151,6 +152,7 @@ private fun BookRow(
     book: WordBook,
     dueCount: Int,
     onClick: () -> Unit,
+    onAddWords: () -> Unit,
     onDelete: () -> Unit
 ) {
     Card(
@@ -198,6 +200,16 @@ private fun BookRow(
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     }
+                )
+            }
+
+            // 加词按钮对所有词库都开放 —— 内置的「四级核心词汇」缺了某个词时，
+            // 用户本来就该能补进去
+            IconButton(onClick = onAddWords) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "添加单词",
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 

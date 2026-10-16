@@ -1,7 +1,5 @@
 package com.wordflash.app.ui.screen.createbook
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,7 +35,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -47,9 +44,14 @@ import androidx.navigation.NavHostController
 /**
  * 新建自定义词库。
  *
- * 三种录入方式并列，用户可以混用：
- * 手打几个 + 再粘贴一批 + 从文件导入剩下的。
- * 全部汇入下方同一个草稿列表，最后一次性保存。
+ * 页面只做两件事：**起个名字**，然后**把单词录进去**。
+ *
+ * 两种录入方式可以混用：先手打几个，再粘贴一批。
+ * 结果都汇入下方同一个草稿列表，最后一次性保存。
+ *
+ * 之所以不做「从文件导入」：词库通常只有几十到几百词，
+ * 粘贴一次就够；文件选择器要多处理权限、编码、格式嗅探，
+ * 对用户来说反而多了一道坎。需要批量导入时，从 Excel 复制整列粘贴即可。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,14 +60,7 @@ fun CreateBookScreen(
     viewModel: CreateBookViewModel = hiltViewModel()
 ) {
     val ui by viewModel.uiState.collectAsStateWithLifecycle()
-    val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
-
-    val filePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument()
-    ) { uri ->
-        if (uri != null) viewModel.importFromFile(context, uri)
-    }
 
     // 保存成功后返回上一页
     LaunchedEffect(ui.saved) {
@@ -123,8 +118,8 @@ fun CreateBookScreen(
             // ==================== 方式一：逐条添加 ====================
             item {
                 SectionCard(
-                    title = "① 逐条添加",
-                    subtitle = "拼写与释义必填，音标选填"
+                    title = "① 逐个添加",
+                    subtitle = "单词和释义填好，点下面的按钮加入列表"
                 ) {
                     OutlinedTextField(
                         value = ui.inputSpelling,
@@ -166,8 +161,8 @@ fun CreateBookScreen(
             // ==================== 方式二：粘贴批量 ====================
             item {
                 SectionCard(
-                    title = "② 粘贴批量导入",
-                    subtitle = "每行一个词，如：abandon 放弃"
+                    title = "② 批量粘贴",
+                    subtitle = "一次贴一整批，每行一个单词"
                 ) {
                     OutlinedTextField(
                         value = ui.pasteText,
@@ -190,35 +185,11 @@ fun CreateBookScreen(
                     }
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        text = "支持空格、逗号、制表符分隔；也能从 Excel 直接复制整列",
+                        text = "用空格、逗号或制表符隔开单词和释义都行；" +
+                            "也能直接从 Excel 复制一列粘进来",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                }
-            }
-
-            // ==================== 方式三：文件导入 ====================
-            item {
-                SectionCard(
-                    title = "③ 从文件导入",
-                    subtitle = "CSV / TXT / JSON，结果同样进入下方列表"
-                ) {
-                    OutlinedButton(
-                        onClick = {
-                            filePicker.launch(
-                                arrayOf(
-                                    "text/csv",
-                                    "text/comma-separated-values",
-                                    "application/json",
-                                    "text/plain",
-                                    "*/*"
-                                )
-                            )
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("选择文件")
-                    }
                 }
             }
 
